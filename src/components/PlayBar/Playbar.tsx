@@ -9,6 +9,12 @@ const Playbar = () => {
   const audioContext = useContext(AudioContext);
   const [currentTime, setCurrentTime] = useState(0);
 
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setCurrentTime(audio.currentTime);
+    }, 1000);
+  }, [])
+
   if (!audioContext) {
     return null;
   }
@@ -19,14 +25,17 @@ const Playbar = () => {
 
   const formattedDuration = secondsToMMSS(duration);
 
+  const formattedCurrentTime = secondsToMMSS(currentTime);
 
   const sliderCurrentTime = Math.round((currentTime / duration) * 100);
 
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      setCurrentTime(audio.currentTime);
-    }, 1000);
-  }, [])
+  const handleChangeCurrentTime = (_: Event, value: number | number[]) => {
+    const currentValue = value as number;
+    const time = Math.round(currentValue / 100 * duration);
+
+    setCurrentTime(time);
+    audio.currentTime = time;
+  }
 
   return (
     <div className={style.playbar}>
@@ -39,8 +48,13 @@ const Playbar = () => {
         <p>{artists}</p>
       </div>
       <div className={style.slider}>
-        <p>00:00</p>
-        <Slider step={1} min={0} max={100} value={sliderCurrentTime} />
+        <p>{formattedCurrentTime}</p>
+        <Slider
+          step={1} 
+          min={0} 
+          max={100} 
+          value={sliderCurrentTime}
+          onChange={handleChangeCurrentTime} />
         <p>{formattedDuration}</p>
       </div>
     </div>
