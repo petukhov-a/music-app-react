@@ -1,10 +1,12 @@
 import MainPage from "./pages/MainPage";
 import style from "./global.module.scss";
+import Playbar from "./components/PlayBar/Playbar";
 
 const App = () => {
   return (
     <div className={style.wrapper}>
       <MainPage />
+      <Playbar />
     </div>
   )
 }

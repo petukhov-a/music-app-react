@@ -5,6 +5,7 @@ type AudioContextType = {
   currentTrack: TrackItem;
   isPlaying: boolean;
   handleToggleAudio: (track: TrackItem) => void;
+  audio: HTMLAudioElement;
 }
 
 type AudioProviderProps = {
@@ -40,7 +41,7 @@ const AudioProvider: FC<AudioProviderProps> = ({ children }) => {
     }
   }
 
-  const value = { currentTrack, isPlaying, handleToggleAudio }
+  const value = { audio, currentTrack, isPlaying, handleToggleAudio }
 
   return (
     <AudioContext.Provider value={value}>
