@@ -8,7 +8,7 @@ import { AudioContext } from '../context/AudioContext';
 import cn from 'classnames';
 
 const Track: FC<TrackItem> = (track) => {
-  const { id, src, preview, title, artists, duration } = track;
+  const { preview, title, artists, duration } = track;
 
   const audioContext = useContext(AudioContext);
 
