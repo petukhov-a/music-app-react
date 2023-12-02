@@ -33,3 +33,8 @@
 .playing * {
   color: #9340fe !important;
 }
+
+@media(max-width: 670px) {
+  .track {
+  }
+}
